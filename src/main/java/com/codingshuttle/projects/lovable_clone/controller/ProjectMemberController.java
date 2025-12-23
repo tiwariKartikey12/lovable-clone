@@ -2,8 +2,11 @@ package com.codingshuttle.projects.lovable_clone.controller;
 
 import com.codingshuttle.projects.lovable_clone.dto.member.InviteMemberRequest;
 import com.codingshuttle.projects.lovable_clone.dto.member.MemberResponse;
+import com.codingshuttle.projects.lovable_clone.dto.member.UpdateMemberRoleRequest;
 import com.codingshuttle.projects.lovable_clone.service.ProjectMemberService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,9 +23,10 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/projects/{projectId}/members")
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class ProjectMemberController {
 
-    private final ProjectMemberService projectMemberService;
+    ProjectMemberService projectMemberService;
 
     @GetMapping
     public ResponseEntity<List<MemberResponse>> getProjectMembers(@PathVariable Long projectId) {
@@ -45,7 +49,7 @@ public class ProjectMemberController {
     public ResponseEntity<MemberResponse> updateMemberRole(
             @PathVariable Long projectId,
             @PathVariable Long memberId,
-            @RequestBody InviteMemberRequest request
+            @RequestBody UpdateMemberRoleRequest request
     ) {
         Long userId = 1L;
         return ResponseEntity.ok(projectMemberService.updateMemberRole(projectId, memberId, request, userId));

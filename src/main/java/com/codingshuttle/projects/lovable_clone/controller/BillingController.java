@@ -7,7 +7,9 @@ import com.codingshuttle.projects.lovable_clone.dto.subscription.SubscriptionRes
 import com.codingshuttle.projects.lovable_clone.dto.subscription.PlanResponse;
 import com.codingshuttle.projects.lovable_clone.service.PlanService;
 import com.codingshuttle.projects.lovable_clone.service.SubscriptionService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +20,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class BillingController {
 
-    private final PlanService planService;
-    private final SubscriptionService subscriptionService;
+    PlanService planService;
+    SubscriptionService subscriptionService;
 
     @GetMapping("/api/plans")
     public ResponseEntity<List<PlanResponse>> getAllPlans() {

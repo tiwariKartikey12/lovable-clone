@@ -4,7 +4,9 @@ import com.codingshuttle.projects.lovable_clone.dto.project.ProjectRequest;
 import com.codingshuttle.projects.lovable_clone.dto.project.ProjectResponse;
 import com.codingshuttle.projects.lovable_clone.dto.project.ProjectSummaryResponse;
 import com.codingshuttle.projects.lovable_clone.service.ProjectService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,9 +23,10 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/projects")
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class ProjectController {
 
-    private final ProjectService projectService;
+    ProjectService projectService;
 
     @GetMapping
     public ResponseEntity<List<ProjectSummaryResponse>> getMyProjects() {
