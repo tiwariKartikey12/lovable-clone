@@ -30,13 +30,11 @@ public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String email;
+    String username;
 
-    String passwordHash;
+    String password;
 
     String name;
-
-    String avatarUrl;
 
     @CreationTimestamp
     Instant createdAt;
